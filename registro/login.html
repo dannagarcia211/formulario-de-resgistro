@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicia sesion</title>
+</head>
+<body>
+    <form id="inicioSesionForm">
+      <h2>Iniciar Sesión</h2>
+
+      <label for="usuario">Usuario (Correo Electrónico):</label>
+      <input type="email" id="usuario" name="usuario" required />
+
+      <label for="contrasena">Contraseña:</label>
+      <input type="password" id="contrasena" name="contrasena" required />
+
+      <button type="button" onclick="iniciarSesion()">Iniciar Sesión</button>
+    </form>
+
+    <script>
+        function iniciarSesion() {
+             var usuarioIngresado = document.getElementById("usuario").value;
+             var contrasenaIngresada = document.getElementById("contrasena").value;
+
+             var usuarioAlmacenado = localStorage.getItem("usuario");
+
+            if (usuarioAlmacenado) {
+             usuarioAlmacenado = JSON.parse(usuarioAlmacenado);
+
+            if (
+                 usuarioIngresado === usuarioAlmacenado.correo &&
+               contrasenaIngresada === usuarioAlmacenado.contrasena) {
+               alert("Inicio de sesión exitoso. ¡Bienvenido!");
+               localStorage.set('usuarioLogueando', usuarioAlmacenado)
+
+               window.location.href = "index.html"; 
+              } else {
+               alert(
+                 "Usuario o contraseña incorrectos. Por favor, inténtalo de nuevo."
+                );
+               }
+            }
+        }
+    </script>
+</body>
